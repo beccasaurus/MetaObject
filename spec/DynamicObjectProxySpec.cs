@@ -6,21 +6,18 @@ using Microsoft.CSharp.RuntimeBinder;
 public class HasDynamicStuff : IDynamicMetaObjectProvider {
 
 	#region DynamicObjectProxy
-	public DynamicObjectProxy _dynamic { get { return new DynamicObjectProxy(this); } }
-	public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e) {
-		var param = e as System.Linq.Expressions.ParameterExpression;
-		Console.WriteLine("Name:{0} IsByRef:{1}", param.Name, param.IsByRef);
-		Console.WriteLine("GetMetaObject({0}) Type:{1} NodeType:{2} GetType:{3}", e, e.Type, e.NodeType, e.GetType());
-		return _dynamic.GetMetaObjectProxy(e);
-	}
+	public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new DynamicObjectProxy(e, this); }
 	#endregion
 
 	#region Properties for testing
 	public string MyPropertyValue;
 	#endregion
 
+	public string RealMethod() { return "hi from a real, non-dynamic method"; }
+
 	#region DynamicObject method implementations ... these are all optional
 	public bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result) {
+		Console.WriteLine("TryInvokeMember({0}, {1})", binder.Name, args);
 		if (binder.Name == "MyMethod") {
 			result = "Result of MyMethod"; return true;
 		} else {
@@ -28,22 +25,22 @@ public class HasDynamicStuff : IDynamicMetaObjectProvider {
 		}
 	}
 
-	public bool TryGetMember(GetMemberBinder binder, out object result) {
-		Console.WriteLine("TryGetMember {0}", binder.Name);
-		if (binder.Name == "MyProperty") {
-			result = "Result of MyProperty"; return true;
-		} else {
-			result = null; return false;
-		}
-	}
+	//public bool TryGetMember(GetMemberBinder binder, out object result) {
+	//	Console.WriteLine("TryGetMember {0}", binder.Name);
+	//	if (binder.Name == "MyProperty") {
+	//		result = "Result of MyProperty"; return true;
+	//	} else {
+	//		result = null; return false;
+	//	}
+	//}
 
-	public bool TrySetMember(SetMemberBinder binder, object value) {
-		if (binder.Name == "MyProperty") {
-			MyPropertyValue = value.ToString(); return true;
-		} else {
-			return false;
-		}
-	}
+	//public bool TrySetMember(SetMemberBinder binder, object value) {
+	//	if (binder.Name == "MyProperty") {
+	//		MyPropertyValue = value.ToString(); return true;
+	//	} else {
+	//		return false;
+	//	}
+	//}
 	#endregion
 }
 
@@ -79,9 +76,9 @@ public class DynamicObjectProxySpec {
     public void can_implement_TryGetIndex() {
 	}
 
-    [Test]
+    [Test][Ignore]
     public void can_implement_TryGetMember() {
-		AssertThrows<RuntimeBinderException>("`DynamicObjectProxy' does not contain a definition for `IDontExist'", () => {
+		AssertThrows<RuntimeBinderException>("`HasDynamicStuff' does not contain a definition for `IDontExist'", () => {
 			var x = Magical.IDontExist;
 		});
 
@@ -94,20 +91,21 @@ public class DynamicObjectProxySpec {
 
     [Test]
     public void can_implement_TryInvokeMember() {
-		AssertThrows<RuntimeBinderException>("`DynamicObjectProxy' does not contain a definition for `IDontExist'", () => {
+		(Magical.RealMethod() as string).ShouldEqual("hi from a real, non-dynamic method");
+		(Magical.MyMethod()   as string).ShouldEqual("Result of MyMethod");
+
+		AssertThrows<RuntimeBinderException>("`HasDynamicStuff' does not contain a definition for `IDontExist'", () => {
 			Magical.IDontExist();
 		});
-
-		(Magical.MyMethod() as string).ShouldEqual("Result of MyMethod");
     }
 
     [Test][Ignore]
     public void can_implement_TrySetIndex() {
 	}
 
-    [Test]
+    [Test][Ignore]
     public void can_implement_TrySetMember() {
-		AssertThrows<RuntimeBinderException>("`DynamicObjectProxy' does not contain a definition for `IDontExist'", () => {
+		AssertThrows<RuntimeBinderException>("`HasDynamicStuff' does not contain a definition for `IDontExist'", () => {
 			Magical.IDontExist = "hi";
 		});
 
