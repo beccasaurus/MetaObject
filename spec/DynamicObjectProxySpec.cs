@@ -6,7 +6,7 @@ using Microsoft.CSharp.RuntimeBinder;
 public class HasDynamicStuff : IDynamicMetaObjectProvider {
 
 	#region DynamicObjectProxy
-	public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new MetaDynamic(e, this); }
+	public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new MetaObject(e, this); }
 	#endregion
 
 	#region Properties for testing

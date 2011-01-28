@@ -21,6 +21,8 @@
  *
  * So I went into Mono and grabbed it.  Grabbed some other things, as needed.  And massaged it until it worked without a DynamicObject.
  *
+ * MetaDynamic isn't a very intuitive name, so I renamed it to MetaObject because that's what you need to implement a IDynamicMetaObjectProvider!
+ *
  */
 
 using System;
@@ -33,16 +35,16 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Runtime.CompilerServices;
 
-/// <summary>MetaDynamic gives your own classes the ability to easily implement IDynamicMetaObjectProvider without inheriting from DynamicObject</summary>
+/// <summary>MetaObject gives your own classes the ability to easily implement IDynamicMetaObjectProvider without inheriting from DynamicObject</summary>
 /// <remarks>
-/// MetaDynamic should NOT be used directly.  It's not intended for that.
+/// MetaObject should NOT be used directly.  It's not intended for that.
 ///
-/// The typical way to use MetaDynamic is:
+/// The typical way to use MetaObject is:
 /// 
 ///   public class MyClass : IDynamicMetaObjectProvider {
 ///
 ///	      // this one line of code gives your class the ability to define Try* methods, *just* like a DynamicObject!
-///       public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new MetaDynamic(e, this); }
+///       public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new MetaObject(e, this); }
 ///
 ///       public bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result) {
 ///           result = "You called: " + binder.Name;
@@ -50,9 +52,9 @@ using System.Runtime.CompilerServices;
 ///       }
 ///   }
 /// </remarks>
-public class MetaDynamic : DynamicMetaObject {
+public class MetaObject : DynamicMetaObject {
 
-	public MetaDynamic(Expression expression, object value) : base(expression, BindingRestrictions.Empty, value) {}
+	public MetaObject(Expression expression, object value) : base(expression, BindingRestrictions.Empty, value) {}
 
 	public Type ValueType { get { return Value.GetType(); } }
 
