@@ -8,8 +8,8 @@
     <ProjectGuid>{758EAD3F-01A3-4BBF-AA97-9947D7394339}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynamicObjectProxy</RootNamespace>
-    <AssemblyName>DynamicObjectProxy</AssemblyName>
+    <RootNamespace>MetaObject</RootNamespace>
+    <AssemblyName>MetaObject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

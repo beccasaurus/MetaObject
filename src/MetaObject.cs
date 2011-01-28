@@ -1,4 +1,4 @@
-﻿// The original Apache license from the header or some of the DLR classes that were used to create DynamicObjectProxy
+﻿// The original Apache license from the header or some of the DLR classes that were used to create MetaObject
 /* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation. 

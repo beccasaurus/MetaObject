@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicObjectProxy", "src\DynamicObjectProxy.csproj", "{758EAD3F-01A3-4BBF-AA97-9947D7394339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaObject", "src\MetaObject.csproj", "{758EAD3F-01A3-4BBF-AA97-9947D7394339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicObjectProxy.Specs", "spec\DynamicObjectProxy.Specs.csproj", "{F9C1416F-A54C-460D-8565-925DF26DFF96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaObject.Specs", "spec\MetaObject.Specs.csproj", "{F9C1416F-A54C-460D-8565-925DF26DFF96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using Microsoft.CSharp.RuntimeBinder;
 
 public class HasDynamicStuff : IDynamicMetaObjectProvider {
 
-	#region DynamicObjectProxy
+	#region MetaObject
 	public DynamicMetaObject GetMetaObject(System.Linq.Expressions.Expression e){ return new MetaObject(e, this); }
 	#endregion
 
@@ -43,7 +43,7 @@ public class HasDynamicStuff : IDynamicMetaObjectProvider {
 }
 
 [TestFixture]
-public class DynamicObjectProxySpec {
+public class MetaObjectSpec {
 
 	dynamic Magical;
 
