@@ -1,3 +1,4 @@
 *.sw?
 obj
 bin
+TestResult.xml
