@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>MetaObject</id>
+    <version>0.1.0.0</version>
+    <authors>remi Taylor</authors>
+    <description>Adds DynamicObject support to your .NET classes without having to inherit from DynamicObject</description>
+    <projectUrl>https://github.com/remi/MetaObject</projectUrl>
+  </metadata>
+  <files>
+    <file src="bin\Release\MetaObject.dll" target="lib" />
+    <file src="src\**.cs" />
+    <file src="README.markdown" />
+  </files>
+</package>
