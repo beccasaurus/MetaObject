@@ -1,6 +1,8 @@
 MetaObject
 ==========
 
+    Install-Package MetaObject
+
 Background
 ----------
 
